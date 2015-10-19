@@ -36,6 +36,9 @@ POLL_RESULTS = "Candidate:%s  Total Votes:%s\n"
 def prompt(string)
   puts string
   user_input = gets.chomp.downcase
+  if user_input.length > 2
+    user_input = user_input.capitalize
+  end
   user_input
 end
 
@@ -160,17 +163,19 @@ def generate_poll
     politics = {}
     parties = {}
 
-    #build hash
+    #build hash, counter for politic
     @politics.each do |politic|
       politics[politic] = 0
     end
 
     #build hash for parties
     @parties.each do |party|
-      #only if the key does not exist add it
+      #only if the key(party) does not exist add it
       if !parties.has_key?(party)
         candidate = get_candidate(party)
         if candidate
+          #reset votes for candidates
+          candidate.reset_votes
           parties[party] = {candidate:candidate}
         end
       end
@@ -312,7 +317,7 @@ def test
 
   #build voters array
   json_data["results"].each do |user|
-    #build user name
+    #build user name, assign politics randomly
     name = user["user"]["name"]["first"] + " " + user["user"]["name"]["last"]
     random_politics = rand(0..4)
     politics = @politics[random_politics]

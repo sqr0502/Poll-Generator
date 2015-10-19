@@ -32,6 +32,10 @@ class Politician < Person
     @party
   end
 
+  def reset_votes
+    @votes = 1
+  end
+
  #increment votes
   def add_vote(number)
     @votes += number
