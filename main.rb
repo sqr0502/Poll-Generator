@@ -42,7 +42,7 @@ def prompt(string)
   user_input
 end
 
-#get party full string based on input
+#get party returns a full string based on input
 def get_party(party)
   if party == "d"
     party = "Democrat"
@@ -52,7 +52,7 @@ def get_party(party)
   party
 end
 
-#get politics full string based on input
+#get politics returns full string based on input
 def get_politics(politics)
   case politics
     when "t"
@@ -163,7 +163,7 @@ def generate_poll
     politics = {}
     parties = {}
 
-    #build hash, counter for politic
+    #build hash counter for politic
     @politics.each do |politic|
       politics[politic] = 0
     end
@@ -184,6 +184,7 @@ def generate_poll
 
     #group votes by voter politics
     @voters.each do |voter|
+      #count of each politics
       politics[voter.get_politics()] += 1
     end
 
@@ -219,7 +220,7 @@ def generate_poll
       end
 
     end
-  #return parties is hash with candidates of datatype politician
+  #return parties hash with candidates of datatype politician
   parties
 end
 
@@ -236,7 +237,6 @@ def print_poll(poll)
 end
 
 def update(person)
-  # user_input = prompt(UPDATE_OPTIONS_CONST)
   #get new name
   new_name = prompt(NAME_UPDATE_CONST)
   #modify name if and only if a name was entered
